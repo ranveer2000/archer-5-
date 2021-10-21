@@ -13,6 +13,7 @@ var gameovers,theme;
 var stop=0;
 var shoot;
 var hit;
+var score=0;
 
 function preload() {
   backgroundImg = loadImage("./assets/background.png");
@@ -93,6 +94,10 @@ if(numberOfArrows===0 && stop===0){
   textAlign("center");
   textSize(30);
   text("Remaining Arrows : " + numberOfArrows, 200, 100);
+  fill("#FFFF");
+  textAlign("center");
+  textSize(30);
+  text("score : " + score, width-100, 100);
 }
 
 function keyPressed() {
@@ -127,6 +132,7 @@ function collide(index,board){
     var collision = Matter.SAT.collides(playerArrows[index].body, board.body);
 
     if (collision.collided) {
+      score += 50;
       Matter.World.remove(world, playerArrows[index].body);
       delete playerArrows[index];
       hit.play();
